@@ -70,10 +70,7 @@ def grade_pred(input_parameters : model_input):
     input_list = [age, height, weight, fat, stretch, bmi, crossUp, runLong, runRepeat, jump, armStrength, sex_F, sex_M ]
     
     prediction = grade_clf_model.predict([input_list])
-    if prediction[0]==0:
-        return "0"
-    else: 
-        return "not 0 group"
+    return prediction[0].item()
 
 
 @app.get('/')
