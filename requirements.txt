@@ -55,3 +55,4 @@ typing_extensions==4.5.0
 urllib3==1.26.15
 uvicorn==0.21.1
 wcwidth==0.2.6
+lightgbm==3.3.3
