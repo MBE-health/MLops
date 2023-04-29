@@ -40,36 +40,37 @@ class clf_input(BaseModel):
     성별구분코드_F:int
     성별구분코드_M:int
 
-# loading the saved model
-create_CF = joblib.load('./model/non_rec/create_CF.pkl')
-get_CF = joblib.load('./model/non_rec/get_CF.pkl')
-get_freq_item = joblib.load('./model/non_rec/get_freq_item.pkl')
-get_association_rules = joblib.load('./model/non_rec/get_association_rules.pkl')
-get_apriori_result = joblib.load('./model/non_rec/get_apriori_result.pkl')
-get_sorted= joblib.load('./model/non_rec/get_sorted.pkl')
-create_top5_ex = joblib.load('./model/non_rec/create_top5_ex.pkl')
-get_sparse_matrix = joblib.load('./model/non_rec/get_sparse_matrix.pkl')
-get_top5_ex = joblib.load('./model/non_rec/get_top5_ex.pkl')
+
 
 def non_ex(group_num, new_user_df):
 
    
-
+    # loading the saved model
+    #create_CF = joblib.load('./model/non_rec/create_CF.pkl')
+    #get_CF = joblib.load('./model/non_rec/get_CF.pkl')
+    #
+    #get_freq_item = joblib.load('./model/non_rec/get_freq_item.pkl')
+    #get_association_rules = joblib.load('./model/non_rec/get_association_rules.pkl')
+    #get_apriori_result = joblib.load('./model/non_rec/get_apriori_result.pkl')
+    #get_sorted= joblib.load('./model/non_rec/get_sorted.pkl')
+    #create_top5_ex = joblib.load('./model/non_rec/create_top5_ex.pkl')
+    #get_sparse_matrix = joblib.load('./model/non_rec/get_sparse_matrix.pkl')
+    #get_top5_ex = joblib.load('./model/non_rec/get_top5_ex.pkl')
     data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
-    similarity_pair=create_CF(data, new_user_df)
-    pre_ex_list =get_CF(similarity_pair, "준비운동", int(data.shape[0]*(10/100)))
-    main_ex_list = get_CF(similarity_pair, "본운동", int(data.shape[0]*(10/100)))
-    after_ex_list = get_CF(similarity_pair, "마무리운동", int(data.shape[0]*(10/100)))
+    #similarity_pair=create_CF(data, new_user_df)
+    #pre_ex_list =get_CF(similarity_pair, "준비운동", int(data.shape[0]*(10/100)))
+    #main_ex_list = get_CF(similarity_pair, "본운동", int(data.shape[0]*(10/100)))
+    #after_ex_list = get_CF(similarity_pair, "마무리운동", int(data.shape[0]*(10/100)))
 
 
-    pre_ar_df = get_apriori_result(pre_ex_list,min_support = 0.05, min_confidence=0.8)
-    pre_top5 = get_top5_ex(pre_ar_df)
+    #pre_ar_df = get_apriori_result(pre_ex_list,min_support = 0.05, min_confidence=0.8)
+    #pre_top5 = get_top5_ex(pre_ar_df)
 
-    main_ar_df = get_apriori_result(main_ex_list,min_support = 0.05, min_confidence=0.8)
-    main_top5 = get_top5_ex(main_ar_df)
+    #main_ar_df = get_apriori_result(main_ex_list,min_support = 0.05, min_confidence=0.8)
+    #main_top5 = get_top5_ex(main_ar_df)
     
-    after_ar_df = get_apriori_result(after_ex_list,min_support = 0.05, min_confidence=0.8)
-    after_top5 = get_top5_ex(after_ar_df)
+    #after_ar_df = get_apriori_result(after_ex_list,min_support = 0.05, min_confidence=0.8)
+    #after_top5 = get_top5_ex(after_ar_df)
 
 
 def parse_input(input_parameters : clf_input):
