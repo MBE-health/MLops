@@ -39,7 +39,7 @@ class clf_input(BaseModel):
 
 
 
-def non_rec(group_num, input_parameters):
+def non_ex(group_num, input_parameters):
 
     import pandas as pd 
     # loading the saved model
@@ -102,7 +102,7 @@ def gred_pred(input_parameters : clf_input):
 @app.post('/non_rec')
 def non_rec(input_parameters : clf_input):
     group_num = gred_pred(input_parameters)
-    rec = non_rec(group_num, input_parameters)
+    rec = non_ex(group_num, input_parameters)
     return group_num
 
 
