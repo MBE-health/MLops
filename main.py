@@ -71,12 +71,9 @@ def non_ex(group_num, new_user_df):
     after_top5 = get_top5_ex(after_ar_df)
 
 
-def gred_pred(input_parameters : clf_input):
+def parse_input(input_parameters : clf_input):
     input_data = input_parameters.json()
     input_dictionary = json.loads(input_data)
-
-    # loading the saved model
-    grade_clf_model = joblib.load('./model/grade_clf/clf_LGBM.pkl')
 
     
     age = input_dictionary['측정연령수']
@@ -95,16 +92,21 @@ def gred_pred(input_parameters : clf_input):
 
 
     input_list = [age, height, weight, fat, stretch, bmi, crossUp, runLong, runRepeat, jump, armStrength, sex_F, sex_M ]
-    
+
+    return input_list
+
+def get_clf(input_list):
+    # loading the saved model
+    grade_clf_model = joblib.load('./model/grade_clf/clf_LGBM.pkl')
     prediction = grade_clf_model.predict([input_list])
     return prediction[0].item()
      
 
 @app.post('/non_rec')
 def non_rec(input_parameters : clf_input):
-    group_num = gred_pred(input_parameters)
-    new_user_df = pd.DataFrame([input_parameters.dict()])
-    rec = non_ex(group_num, new_user_df)
+    group_num = get_clf(parse_input(input_parameters))
+    #new_user_df = pd.DataFrame([input_parameters.dict()])
+    #rec = non_ex(group_num, new_user_df)
     return group_num
 
 
@@ -112,3 +114,4 @@ def non_rec(input_parameters : clf_input):
 @app.get('/')
 def home():
 	return {"message": "Welcome Home!"}
+
