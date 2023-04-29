@@ -43,7 +43,7 @@ def non_ex(group_num, input_parameters):
 
     import pandas as pd 
     # loading the saved model
-    create_CF = joblib.load('./model/rec/non_rec/create_CF.pkl')
+    create_CF = joblib.load('./model/non_rec/create_CF.pkl')
     get_CF = joblib.load('./model/non_rec/get_CF.pkl')
     data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
     get_freq_item = joblib.load('./model/non_rec/get_freq_item.pkl')
