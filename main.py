@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.encoders import jsonable_encoder
 import joblib
 import json
 from pydantic import BaseModel
@@ -105,7 +106,7 @@ def get_clf(input_list):
 @app.post('/non_rec')
 def non_rec(input_parameters : clf_input):
     group_num = get_clf(parse_input(input_parameters))
-    #new_user_df = pd.DataFrame([input_parameters.dict()])
+    new_user_df =  pd.DataFrame([input_parameters.dict()])      
     #rec = non_ex(group_num, new_user_df)
     return group_num
 
