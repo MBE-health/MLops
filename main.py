@@ -39,9 +39,9 @@ class clf_input(BaseModel):
 
 
 
-def non_rec():
+def non_rec(group_num, input_parameters):
 
-
+    import pandas as pd 
     # loading the saved model
     create_CF = joblib.load('./model/rec/non/create_CF.pkl')
     get_CF = joblib.load('./model/rec/non/get_CF.pkl')
@@ -54,7 +54,7 @@ def non_rec():
     get_sparse_matrix = joblib.load('./model/rec/non/get_sparse_matrix.pkl')
     get_top5_ex = joblib.load('./model/rec/non/get_top5_ex.pkl')
 
-    similarity_pair=create_CF(data, new_user_df)
+    similarity_pair=create_CF(data, pd.DataFrame([input_parameters.dict()]))
     pre_ex_list =get_CF(similarity_pair, "준비운동", int(data.shape[0]*(10/100)))
     main_ex_list = get_CF(similarity_pair, "본운동", int(data.shape[0]*(10/100)))
     after_ex_list = get_CF(similarity_pair, "마무리운동", int(data.shape[0]*(10/100)))
@@ -102,6 +102,7 @@ def gred_pred(input_parameters : clf_input):
 @app.post('/non_rec')
 def non_rec(input_parameters : clf_input):
     group_num = gred_pred(input_parameters)
+    rec = non_rec(group_num, input_parameters)
     return group_num
 
 
