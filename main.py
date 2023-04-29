@@ -43,16 +43,16 @@ def non_ex(group_num, input_parameters):
 
     import pandas as pd 
     # loading the saved model
-    create_CF = joblib.load('./model/rec/non/create_CF.pkl')
-    get_CF = joblib.load('./model/rec/non/get_CF.pkl')
-    data = joblib.load('./model/rec/user_group/adult_group_{}.pkl'.format(group_num))
-    get_freq_item = joblib.load('./model/rec/non/get_freq_item.pkl')
-    get_association_rules = joblib.load('./model/rec/non/get_association_rules.pkl')
-    get_apriori_result = joblib.load('./model/rec/non/get_apriori_result.pkl')
-    get_sorted= joblib.load('./model/rec/non/get_sorted.pkl')
-    create_top5_ex = joblib.load('./model/rec/non/create_top5_ex.pkl')
-    get_sparse_matrix = joblib.load('./model/rec/non/get_sparse_matrix.pkl')
-    get_top5_ex = joblib.load('./model/rec/non/get_top5_ex.pkl')
+    create_CF = joblib.load('./model/rec/non_rec/create_CF.pkl')
+    get_CF = joblib.load('./model/non_rec/get_CF.pkl')
+    data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
+    get_freq_item = joblib.load('./model/non_rec/get_freq_item.pkl')
+    get_association_rules = joblib.load('./model/non_rec/get_association_rules.pkl')
+    get_apriori_result = joblib.load('./model/non_rec/get_apriori_result.pkl')
+    get_sorted= joblib.load('./model/non_rec/get_sorted.pkl')
+    create_top5_ex = joblib.load('./model/non_rec/create_top5_ex.pkl')
+    get_sparse_matrix = joblib.load('./model/non_rec/get_sparse_matrix.pkl')
+    get_top5_ex = joblib.load('./model/non_rec/get_top5_ex.pkl')
 
     similarity_pair=create_CF(data, pd.DataFrame([input_parameters.dict()]))
     pre_ex_list =get_CF(similarity_pair, "준비운동", int(data.shape[0]*(10/100)))
