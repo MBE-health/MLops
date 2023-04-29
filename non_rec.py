@@ -1,18 +1,20 @@
+import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
-def create_CF(df,new_user_df):
+def create_CF(df,input_parameters):
   category_col = ["성별구분코드_F", "성별구분코드_M"]
   body_col = ["신장(cm)","체중(kg)","체지방율(%)"]
   # 신장, 체중, 신체 구성, 
   health_col = ["측정연령수","앉아윗몸앞으로굽히기(cm)","BMI(kg/㎡)","교차윗몸일으키기(회)","왕복오래달리기(회)","10M 4회 왕복달리기(초)","제자리 멀리뛰기(cm)","상대악력(%)"]
   col = category_col+body_col + health_col
+  new_user_df =  pd.DataFrame([input_parameters.dict()])    
   CF = pd.DataFrame(cosine_similarity(df[col],new_user_df),columns=["similarity"])
   #CF.columns = total_user.index
   return CF
 
-def get_CF(CF, ex_type, top_n):
+def get_CF(CF,data,  ex_type, top_n):
     idx = CF.sort_values(by = "similarity",ascending = False)[1:top_n].index.values
     ex_list = []
     for i in idx:

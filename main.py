@@ -5,8 +5,7 @@ from fastapi.encoders import jsonable_encoder
 import joblib
 import json
 from pydantic import BaseModel
-import pandas as pd 
-from non_rec import *
+from non_rec import create_CF, get_CF
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
@@ -57,10 +56,10 @@ def non_ex(group_num, new_user_df):
     #get_sparse_matrix = joblib.load('./model/non_rec/get_sparse_matrix.pkl')
     #get_top5_ex = joblib.load('./model/non_rec/get_top5_ex.pkl')
     data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
-    similarity_pair=non_rec.create_CF(data, new_user_df)
-    pre_ex_list =non_rec.get_CF(similarity_pair, "준비운동", int(data.shape[0]*(10/100)))
-    main_ex_list = non_rec.get_CF(similarity_pair, "본운동", int(data.shape[0]*(10/100)))
-    after_ex_list = non_rec.get_CF(similarity_pair, "마무리운동", int(data.shape[0]*(10/100)))
+    similarity_pair=create_CF(data, new_user_df)
+    pre_ex_list =get_CF(similarity_pair, data, "준비운동", int(data.shape[0]*(10/100)))
+    main_ex_list = get_CF(similarity_pair, data,  "본운동", int(data.shape[0]*(10/100)))
+    after_ex_list = get_CF(similarity_pair,data, "마무리운동", int(data.shape[0]*(10/100)))
 
 
     #pre_ar_df = get_apriori_result(pre_ex_list,min_support = 0.05, min_confidence=0.8)
@@ -106,9 +105,8 @@ def get_clf(input_list):
 
 @app.post('/non_rec')
 def non_rec(input_parameters : clf_input):
-    group_num = get_clf(parse_input(input_parameters))
-    new_user_df =  pd.DataFrame([input_parameters.dict()])      
-    rec = non_ex(group_num, new_user_df)
+    group_num = get_clf(parse_input(input_parameters))  
+    rec = non_ex(group_num, input_parameters)
     return group_num
 
 
