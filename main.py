@@ -59,8 +59,9 @@ def non_ex(group_num, new_user_df):
     after_ar_df = get_apriori_result(after_ex_list,min_support = 0.05, min_confidence=0.8)
     after_top5 = get_top5_ex(after_ar_df)
 
-    print(after_top5)
-
+    ex = {"pre_ex":pre_top5, "main_ex":main_top5, "after_ex":after_top5}
+    print(ex)
+    return ex
 
 def parse_input(input_parameters : clf_input):
     input_data = input_parameters.json()
@@ -97,7 +98,7 @@ def get_clf(input_list):
 def non_rec(input_parameters : clf_input):
     group_num = get_clf(parse_input(input_parameters))  
     rec = non_ex(group_num, input_parameters)
-    return group_num
+    return {"group_num":group_num, "ex":rec}
 
 
 
