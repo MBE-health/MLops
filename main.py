@@ -6,6 +6,7 @@ import joblib
 import json
 from pydantic import BaseModel
 import pandas as pd 
+import __main__
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
@@ -46,7 +47,9 @@ def non_ex(group_num, new_user_df):
    
     # loading the saved model
     create_CF = joblib.load('./model/non_rec/create_CF.pkl')
+    __main__.create_CF = create_CF
     get_CF = joblib.load('./model/non_rec/get_CF.pkl')
+    __main__.get_CF = get_CF
     data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
     get_freq_item = joblib.load('./model/non_rec/get_freq_item.pkl')
     get_association_rules = joblib.load('./model/non_rec/get_association_rules.pkl')
@@ -116,3 +119,5 @@ def non_rec(input_parameters : clf_input):
 def home():
 	return {"message": "Welcome Home!"}
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
