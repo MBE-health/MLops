@@ -107,7 +107,7 @@ def get_clf(input_list):
 def non_rec(input_parameters : clf_input):
     group_num = get_clf(parse_input(input_parameters))
     new_user_df =  pd.DataFrame([input_parameters.dict()])      
-    #rec = non_ex(group_num, new_user_df)
+    rec = non_ex(group_num, new_user_df)
     return group_num
 
 
