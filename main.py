@@ -116,6 +116,3 @@ def non_rec(input_parameters : clf_input):
 @app.get('/')
 def home():
 	return {"message": "Welcome Home!"}
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
