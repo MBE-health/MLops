@@ -40,25 +40,22 @@ class clf_input(BaseModel):
     성별구분코드_F:int
     성별구분코드_M:int
 
-
+# loading the saved model
+create_CF = joblib.load('./model/non_rec/create_CF.pkl')
+get_CF = joblib.load('./model/non_rec/get_CF.pkl')
+get_freq_item = joblib.load('./model/non_rec/get_freq_item.pkl')
+get_association_rules = joblib.load('./model/non_rec/get_association_rules.pkl')
+get_apriori_result = joblib.load('./model/non_rec/get_apriori_result.pkl')
+get_sorted= joblib.load('./model/non_rec/get_sorted.pkl')
+create_top5_ex = joblib.load('./model/non_rec/create_top5_ex.pkl')
+get_sparse_matrix = joblib.load('./model/non_rec/get_sparse_matrix.pkl')
+get_top5_ex = joblib.load('./model/non_rec/get_top5_ex.pkl')
 
 def non_ex(group_num, new_user_df):
 
    
-    # loading the saved model
-    create_CF = joblib.load('./model/non_rec/create_CF.pkl')
-    __main__.create_CF = create_CF
-    get_CF = joblib.load('./model/non_rec/get_CF.pkl')
-    __main__.get_CF = get_CF
-    data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
-    get_freq_item = joblib.load('./model/non_rec/get_freq_item.pkl')
-    get_association_rules = joblib.load('./model/non_rec/get_association_rules.pkl')
-    get_apriori_result = joblib.load('./model/non_rec/get_apriori_result.pkl')
-    get_sorted= joblib.load('./model/non_rec/get_sorted.pkl')
-    create_top5_ex = joblib.load('./model/non_rec/create_top5_ex.pkl')
-    get_sparse_matrix = joblib.load('./model/non_rec/get_sparse_matrix.pkl')
-    get_top5_ex = joblib.load('./model/non_rec/get_top5_ex.pkl')
 
+    data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
     similarity_pair=create_CF(data, new_user_df)
     pre_ex_list =get_CF(similarity_pair, "준비운동", int(data.shape[0]*(10/100)))
     main_ex_list = get_CF(similarity_pair, "본운동", int(data.shape[0]*(10/100)))
