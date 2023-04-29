@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import json
 from pydantic import BaseModel
+import pandas as pd 
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
@@ -41,7 +42,7 @@ class clf_input(BaseModel):
 
 def non_ex(group_num, new_user_df):
 
-    import pandas as pd 
+   
     # loading the saved model
     create_CF = joblib.load('./model/non_rec/create_CF.pkl')
     get_CF = joblib.load('./model/non_rec/get_CF.pkl')
@@ -111,5 +112,3 @@ def non_rec(input_parameters : clf_input):
 @app.get('/')
 def home():
 	return {"message": "Welcome Home!"}
-
-if
