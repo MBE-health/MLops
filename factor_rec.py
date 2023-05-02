@@ -18,7 +18,7 @@ from langchain.prompts.chat import (
 
 def get_ex_by_factor(factor):
 
-    openai.apikey = os.environ.get('OPENAI_KEY', 3)
+    openai.apikey = os.getenv('OPENAI_API_KEY')
     llm = OpenAI(temperature=1,model_name="text-davinci-003")
     duckduckgo_tool = DuckDuckGoSearchRun()
     wikipedia_tool = WikipediaAPIWrapper()
