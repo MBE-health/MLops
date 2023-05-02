@@ -61,3 +61,4 @@ pandas
 langchain
 duckduckgo-search
 openai
+wikipedia
