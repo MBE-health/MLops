@@ -58,3 +58,6 @@ wcwidth==0.2.6
 lightgbm==3.3.3
 mlxtend
 pandas
+langchain
+duckduckgo-search
+openai

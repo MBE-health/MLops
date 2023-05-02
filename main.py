@@ -6,6 +6,7 @@ import joblib
 import json
 from pydantic import BaseModel
 from non_rec import *
+from factor_rec import *
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
@@ -101,6 +102,10 @@ def non_rec(input_parameters : clf_input):
     return {"group_num":group_num, "ex":rec}
 
 
+@app.get("/factor_rec/")
+def factor_rec(factor:str):
+    rec = get_ex_by_factor(factor)
+    return {"factor": factor,"ex":rec }
 
 @app.get('/')
 def home():
