@@ -7,6 +7,7 @@ import json
 from pydantic import BaseModel
 from non_rec import *
 from factor_rec import *
+from agent_test import *
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
@@ -106,6 +107,10 @@ def non_rec(input_parameters : clf_input):
 def factor_rec(factor:str):
     rec = get_ex_by_factor(factor)
     return {"factor": factor,"ex":rec }
+
+@app.get("/test")
+def test_gcp():
+    return df_test()
 
 @app.get('/')
 def home():
