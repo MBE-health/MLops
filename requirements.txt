@@ -62,4 +62,3 @@ langchain
 duckduckgo-search
 openai
 wikipedia
-gcsfs
