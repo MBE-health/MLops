@@ -104,9 +104,9 @@ def non_rec(input_parameters : clf_input):
 
 
 @app.get("/search_rec") # 검색 툴 활용한
-def factor_rec(factor:str):
-    rec = get_ex_by_factor(factor)
-    return {"factor": factor,"ex":rec }
+def factor_rec(keyword:str):
+    rec = search_tools_agent(keyword)
+    return {"factor": keyword,"ex":rec }
 
 @app.get("/csv_rec") # csv 데이터 기반
 def test_gcp(keywords:str):
