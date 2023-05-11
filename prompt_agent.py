@@ -41,7 +41,7 @@ def prompt_agent(pd_ex, search_ex, grade):
     Before making workout routine if korean is in exercise candiates, translate it to English.
     tell me what exercise is in step 1, step 2, step 3 and each step have to contain at least 5 exercise from "exercise candidates".
     tell me how much time should be spend for each step 1, step 2, step 3 and just give number for it.
-    output should be only one json. do not add any description about output. Give JSON output. No Raw result is needed to return for output.
+    output should be only one json. Do not return any description for output expect json. Give JSON output. No Raw result is needed to return for output.
     For json format, key for step 1 is "step_1" and key for step 2 is "step_2", key for step 3 is "step_3".
     For json format, key "step_1", "step_2". "step_3" compose of exercise list and time.
     """
