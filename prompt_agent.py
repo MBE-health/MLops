@@ -54,4 +54,4 @@ def prompt_agent(pd_ex, search_ex, grade):
     total_rec=chain.run(ex_list=ex_list, health_condition=grade_data["grade_explanation"])
     #print(ex_list, grade_data["grade_explanation"])
     print(total_rec)
-    return total_rec
+    return json.loads(total_rec)
