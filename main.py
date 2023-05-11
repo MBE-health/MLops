@@ -2,15 +2,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
+from typing import Optional
 import joblib
 import json
 from pydantic import BaseModel
 from non_rec import *
-from factor_rec import *
+from search_agent import *
 from csv_agent import *
+from prompt_agent import prompt_agent
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
+import os 
+import openai
 
+
+openai.apikey = os.getenv('OPENAI_API_KEY')
 app = FastAPI()
 
 origins = ["*"]
@@ -41,8 +47,6 @@ class clf_input(BaseModel):
     성별구분코드_F:int
     성별구분코드_M:int
 
-
-
 def non_ex(group_num, new_user_df):
 
     data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
@@ -65,7 +69,7 @@ def non_ex(group_num, new_user_df):
     print(ex)
     return ex
 
-def parse_input(input_parameters : clf_input):
+def parse_grade_input(input_parameters : clf_input):
     input_data = input_parameters.json()
     input_dictionary = json.loads(input_data)
 
@@ -97,20 +101,29 @@ def get_clf(input_list):
      
 
 @app.post('/non_rec')
-def non_rec(input_parameters : clf_input):
-    group_num = get_clf(parse_input(input_parameters))  
-    rec = non_ex(group_num, input_parameters)
+def non_rec(health_params : clf_input):
+    group_num = get_clf(parse_grade_input(health_params))  
+    rec = non_ex(group_num, health_params)
     return {"group_num":group_num, "ex":rec}
 
 
 @app.get("/search_rec") # 검색 툴 활용한
 def factor_rec(keyword:str):
-    rec = search_tools_agent(keyword)
-    return {"factor": keyword,"ex":rec }
+    search_rec = search_tools_agent(keyword)
+    return {"factor": keyword,"exercise":search_rec }
 
 @app.get("/csv_rec") # csv 데이터 기반
-def test_gcp(keywords:str):
-    return csv_pandas_agent(keywords)
+def csv_rec(keywords:str):
+    csv_rec = csv_pandas_agent(keywords)
+    return {"factor":keywords, "exercise":csv_rec}
+
+@app.post("/total_rec")
+def get_total_rec(health_params : clf_input,csv_keywords:Optional[str] = None,search_keyword:Optional[str] = None ):
+    grade = get_clf(parse_grade_input(health_params))
+    csv_ex = csv_pandas_agent(csv_keywords)
+    search_ex = search_tools_agent(search_keyword)
+    total_rec = prompt_agent(csv_ex, search_ex, grade)
+    return total_rec
 
 @app.get('/')
 def home():

@@ -5,7 +5,7 @@ from langchain.agents import create_csv_agent
 from langchain.output_parsers import CommaSeparatedListOutputParser
 
 def csv_pandas_agent(keywords):
-    openai.apikey = os.getenv('OPENAI_API_KEY')
+    #openai.apikey = os.getenv('OPENAI_API_KEY')
     url =  os.getenv('GCP_kaggle_exercise')
     output_parser = CommaSeparatedListOutputParser()
     #format_instructions = output_parser.get_format_instructions()

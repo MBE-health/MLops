@@ -64,7 +64,7 @@ def set_format():
     return format
 
 def search_tools_agent(keyword):
-    openai.apikey = os.getenv('OPENAI_API_KEY')
+    #openai.apikey = os.getenv('OPENAI_API_KEY')
     llm = OpenAI(temperature=0.5)
     tools = set_tools()
     memory = set_memory()
