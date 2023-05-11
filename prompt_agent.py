@@ -64,5 +64,5 @@ def prompt_agent(pd_ex, search_ex, grade):
                                     input_variables=["ex_list","health_condition"],)
     chain = LLMChain(llm=chat, prompt=chat_prompt)
     output_kor=chain.run(ex_list=ex_list, health_condition=health_condition)
-    parser.parse(output_kor)
-    return output_kor
+    output = parser.parse(output_kor)
+    return output
