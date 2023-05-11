@@ -7,7 +7,7 @@ import json
 from pydantic import BaseModel
 from non_rec import *
 from factor_rec import *
-from agent_test import *
+from csv_agent import *
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
 
@@ -103,14 +103,14 @@ def non_rec(input_parameters : clf_input):
     return {"group_num":group_num, "ex":rec}
 
 
-@app.get("/factor_rec/")
+@app.get("/search_rec") # 검색 툴 활용한
 def factor_rec(factor:str):
     rec = get_ex_by_factor(factor)
     return {"factor": factor,"ex":rec }
 
-@app.get("/test")
-def test_gcp():
-    return df_test()
+@app.get("/csv_rec") # csv 데이터 기반
+def test_gcp(keywords:str):
+    return csv_pandas_agent(keywords)
 
 @app.get('/')
 def home():
