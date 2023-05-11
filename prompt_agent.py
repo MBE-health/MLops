@@ -8,8 +8,12 @@ from langchain.prompts.chat import (
 )
 
 def set_exercise(pd_ex, search_ex):
-    
-    ex_list = (", ").join(pd_ex+search_ex)
+    temp = []
+    if pd_ex[0]!="'Agent stopped due to iteration limit or time limit.'":
+        temp +=pd_ex
+    if search_ex[0]!="'Agent stopped due to iteration limit or time limit.'":
+        temp+=search_ex 
+    ex_list = (", ").join(temp)
     print(ex_list)
     print(pd_ex, search_ex)
     return ex_list
@@ -50,4 +54,4 @@ def prompt_agent(pd_ex, search_ex, grade):
     total_rec=chain.run(ex_list=ex_list, health_condition=grade_data["grade_explanation"])
     print(ex_list, grade_data["grade_explanation"])
     print(total_rec)
-    return json.loads(total_rec)
+    return total_rec
