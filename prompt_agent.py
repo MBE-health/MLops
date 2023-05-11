@@ -10,7 +10,8 @@ from langchain.prompts.chat import (
 def set_exercise(pd_ex, search_ex):
     
     ex_list = (", ").join(pd_ex+search_ex)
-    print(ex_list,pd_ex, search_ex)
+    print(ex_list)
+    print(pd_ex, search_ex)
     return ex_list
 
 def set_grade_explanation(grade_num):
@@ -44,8 +45,9 @@ def prompt_agent(pd_ex, search_ex, grade):
     human_template = "{ex_list}"
     human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
     chat_prompt = ChatPromptTemplate(messages = [system_message_prompt, human_message_prompt], input_variables=["ex_list","health_condition"],)
-    #chat_prompt = ChatPromptTemplate(messages = [system_message_prompt, human_message_prompt], partial_variables={"format_instructions": format_instructions},input_variables=["ex_list","health_condition"],)
-    #chain = LLMChain(llm=chat, prompt=chat_prompt)
-    #total_rec=chain.run(ex_list=ex_list, health_condition=grade_data["grade_explanation"])
+    chat_prompt = ChatPromptTemplate(messages = [system_message_prompt, human_message_prompt], partial_variables={"format_instructions": format_instructions},input_variables=["ex_list","health_condition"],)
+    chain = LLMChain(llm=chat, prompt=chat_prompt)
+    total_rec=chain.run(ex_list=ex_list, health_condition=grade_data["grade_explanation"])
     print(ex_list, grade_data["grade_explanation"])
-    return {ex_list, grade_data["grade_explanation"]}
+    print(total_rec)
+    return json.loads(total_rec)
