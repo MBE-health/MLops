@@ -123,7 +123,7 @@ def get_total_rec(health_params : clf_input,csv_keywords:str,search_keyword:str 
     csv_ex = csv_pandas_agent(csv_keywords)
     search_ex = search_tools_agent(search_keyword)
     total_rec = prompt_agent(csv_ex, search_ex, grade)
-    return Response(content=total_rec, media_type="application/json")
+    return total_rec
 
 @app.get('/')
 def home():
