@@ -51,7 +51,7 @@ def prompt_agent(pd_ex, search_ex, grade):
     output_parser = CommaSeparatedListOutputParser()
     format_instructions = output_parser.get_format_instructions()
     human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
-    chat_prompt = ChatPromptTemplate(messages = [system_message_prompt, human_message_prompt],partial_variables={"format_instructions": format_instructions})
+    chat_prompt = ChatPromptTemplate(messages = [system_message_prompt, human_message_prompt],partial_variables={"format_instructions": format_instructions}, input_variables=["ex_list","health_condition"],)
     chain = LLMChain(llm=chat, prompt=chat_prompt)
     output_kor=chain.run(ex_list=ex_list, health_condition=grade_data)
     return output_kor
