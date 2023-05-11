@@ -11,14 +11,14 @@ def set_exercise(pd_ex, search_ex):
     ex_list = (", ").format(pd_ex+search_ex)
     return ex_list
 
-def set_grade_explanation(grade):
+def set_grade_explanation(grade_num):
     grade = {0:"참가증", 1:'3등급', 2:'2등급', 3:'1등급'}
     _1st = "Cardiorespiratory endurance, strength, muscular endurance, and flexibility are all at or above the 70th percentile, and one of agility, quickness, or coordination is at or above the 70th percentile."
     _2nd = "Cardiorespiratory endurance, strength, muscular endurance, and flexibility are all at or above the 50th percentile, and one of agility, quickness, or coordination is at or above the 50th percentile."
     _3nd = "Cardiorespiratory endurance, strength, muscular endurance, and flexibility are all below the 30th percentile and within an appropriate BMI level."
     _4nd = "Cardiorespiratory endurance, muscular strength, muscular endurance, and flexibility are all below the 30th percentile and do not fall within an appropriate BMI level."
     explanation = {0:_4nd, 1:_3nd, 2:_2nd, 3:_1st}
-    data = {"grade_num": grade, "grade_name": grade[grade], "grade_explanation":explanation[grade]}
+    data = {"grade_num": grade_num, "grade_name": grade[grade_num], "grade_explanation":explanation[grade_num]}
     return data
 
 def prompt_agent(pd_ex, search_ex, grade):
