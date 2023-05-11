@@ -52,6 +52,6 @@ def prompt_agent(pd_ex, search_ex, grade):
     #chat_prompt = ChatPromptTemplate(messages = [system_message_prompt, human_message_prompt], partial_variables={"format_instructions": format_instructions},input_variables=["ex_list","health_condition"],)
     chain = LLMChain(llm=chat, prompt=chat_prompt)
     total_rec=chain.run(ex_list=ex_list, health_condition=grade_data["grade_explanation"])
-    print(ex_list, grade_data["grade_explanation"])
+    #print(ex_list, grade_data["grade_explanation"])
     print(total_rec)
     return total_rec
