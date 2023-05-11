@@ -9,6 +9,7 @@ from langchain.prompts.chat import (
 
 def set_exercise(pd_ex, search_ex):
     ex_list = (", ").format(pd_ex+search_ex)
+    print(ex_list)
     return ex_list
 
 def set_grade_explanation(grade_num):
