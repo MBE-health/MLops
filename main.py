@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from typing import Optional
@@ -123,7 +123,7 @@ def get_total_rec(health_params : clf_input,csv_keywords:str,search_keyword:str 
     csv_ex = csv_pandas_agent(csv_keywords)
     search_ex = search_tools_agent(search_keyword)
     total_rec = prompt_agent(csv_ex, search_ex, grade)
-    return total_rec
+    return Response(content=total_rec, media_type="application/json")
 
 @app.get('/')
 def home():
