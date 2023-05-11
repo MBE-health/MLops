@@ -17,8 +17,6 @@ def set_exercise(pd_ex, search_ex):
     if search_ex[0]!="'Agent stopped due to iteration limit or time limit.'":
         temp+=search_ex 
     ex_list = (", ").join(temp)
-    print(ex_list)
-    print(pd_ex, search_ex)
     return ex_list
 
 def set_grade_explanation(grade_num):

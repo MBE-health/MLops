@@ -49,7 +49,9 @@ class clf_input(BaseModel):
 
 def non_ex(group_num, new_user_df):
 
-    data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
+    #data = joblib.load('./user_group/adult_group_{}.pkl'.format(group_num))
+    url =  os.getenv('adult_group_{}'.format(group_num))
+    data=pd.read_csv(url)
     similarity_pair=create_CF(data, new_user_df)
     pre_ex_list =get_CF(similarity_pair, data, "준비운동", int(data.shape[0]*(10/100)))
     main_ex_list = get_CF(similarity_pair, data,  "본운동", int(data.shape[0]*(10/100)))
