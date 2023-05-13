@@ -1,3 +1,4 @@
+'''
 import tensorflow as tf
 import numpy as np
 from PIL import Image
@@ -35,3 +36,5 @@ def pred(img_array:np.ndarray):
   # Print the predicted class
   predicted_class = classes[np.argmax(pred)]
   return predicted_class
+
+'''

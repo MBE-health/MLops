@@ -63,4 +63,3 @@ duckduckgo-search
 openai
 wikipedia
 tabulate
-tensorflow

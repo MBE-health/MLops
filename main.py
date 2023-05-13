@@ -129,6 +129,7 @@ def get_total_rec(health_params : clf_input,csv_keywords:str,search_keyword:str 
     total_rec = prompt_agent(csv_ex, search_ex, grade)
     return total_rec
 
+'''
 @app.post("/predict")
 async def pred(file:bytes = File(...)):
   image = read_image(file)
@@ -136,8 +137,7 @@ async def pred(file:bytes = File(...)):
   prediction = pred(image)
   print(prediction)
   return prediction
-
-
+'''
 @app.get('/')
 def home():
 	return {"message": "Welcome Home!"}
