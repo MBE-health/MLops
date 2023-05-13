@@ -2,6 +2,7 @@
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
+from fastapi import FastAPI, File, UploadFile
 from typing import Optional
 import joblib
 import json
@@ -9,6 +10,7 @@ from pydantic import BaseModel
 from non_rec import *
 from search_agent import *
 from csv_agent import *
+from food_clf import *
 from prompt_agent import prompt_agent
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori, association_rules
@@ -126,6 +128,15 @@ def get_total_rec(health_params : clf_input,csv_keywords:str,search_keyword:str 
     search_ex = search_tools_agent(search_keyword)
     total_rec = prompt_agent(csv_ex, search_ex, grade)
     return total_rec
+
+@app.post("/predict")
+async def pred(file:bytes = File(...)):
+  image = read_image(file)
+  image = preprocessing(image)
+  prediction = pred(image)
+  print(prediction)
+  return prediction
+
 
 @app.get('/')
 def home():
