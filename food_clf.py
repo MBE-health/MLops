@@ -7,7 +7,7 @@ input_shape=(224,224)
 classes = ['닭가슴살', '닭가슴살샐러드', '닭갈비', '닭강정', '닭고기볶음']
 
 def load_model():
-  model = tf.keras.models.load_model('./food_clf/food_classifier_mobilenet.h5')
+  model = tf.keras.models.load_model('./food_clf/model.json')
   return model
 
 def read_image(image_encoded):
