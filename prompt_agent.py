@@ -43,15 +43,50 @@ def prompt_agent(pd_ex, search_ex, grade):
     template = """"
     You are a helpful assistant that make workout routine using {ex_list} which is called "exercise candidates". Workout routine is make up for 3 steps. 
     client's health condition is {health_condition}.
-    For step 1he, we need to do Warm-up and Stretching and it is important to warm up your body and stretch your muscles to prevent injury. 
+    For step 1, we need to do Warm-up and Stretching and it is important to warm up your body and stretch your muscles to prevent injury. 
     For step 2, we need to do main exercise.
     For step 3, it is important to cool down your body and stretch your muscles to prevent soreness and stiffness. 
-    Before making workout routine if korean is in exercise candiates, translate it to English.
     tell me what exercise is in step 1, step 2, step 3 and each step have to contain at least 5 exercise from "exercise candidates".
     tell me how much time should be spend in integer number format for each step 1, step 2, step 3.
     output to return should be only one json. do not add any description about output.
     For json format, key for step 1 is "step_1" and key for step 2 is "step_2", key for step 3 is "step_3".
     For json format, key "step_1", "step_2". "step_3" compose of exercise list and time.
+
+    This is example of output 
+    ```
+    {
+  "step_1": {
+    "exercise_list": [
+      "Arm circles",
+      "Jumping jacks",
+      "High knees",
+      "Leg swings",
+      "Butt kicks"
+    ],
+    "time": 10
+  },
+  "step_2": {
+    "exercise_list": [
+      "Medicine ball partner twist",
+      "Wall mountain climber",
+      "Sit-up with single-arm overhand throw",
+      "Sledgehammer swing",
+      "Mountain climber"
+    ],
+    "time": 30
+  },
+  "step_3": {
+    "exercise_list": [
+      "Tricep stretch",
+      "Quad stretch",
+      "Hamstring stretch",
+      "Shoulder stretch",
+      "Walking lunges"
+    ],
+    "time": 10
+  }
+}
+    ```
     """
     system_message_prompt = SystemMessagePromptTemplate.from_template(template)
     human_template = "{ex_list}"
