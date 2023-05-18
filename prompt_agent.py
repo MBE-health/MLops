@@ -51,41 +51,6 @@ def prompt_agent(pd_ex, search_ex, grade):
     output to return should be only one json. do not add any description about output.
     For json format, key for step 1 is "step_1" and key for step 2 is "step_2", key for step 3 is "step_3".
     For json format, key "step_1", "step_2". "step_3" compose of exercise list and time.
-
-    This is example of output 
-    ```
-    {
-  "step_1": {
-    "exercise_list": [
-      "Arm circles",
-      "Jumping jacks",
-      "High knees",
-      "Leg swings",
-      "Butt kicks"
-    ],
-    "time": 10
-  },
-  "step_2": {
-    "exercise_list": [
-      "Medicine ball partner twist",
-      "Wall mountain climber",
-      "Sit-up with single-arm overhand throw",
-      "Sledgehammer swing",
-      "Mountain climber"
-    ],
-    "time": 30
-  },
-  "step_3": {
-    "exercise_list": [
-      "Tricep stretch",
-      "Quad stretch",
-      "Hamstring stretch",
-      "Shoulder stretch",
-      "Walking lunges"
-    ],
-    "time": 10
-  }
-}
     ```
     """
     system_message_prompt = SystemMessagePromptTemplate.from_template(template)
