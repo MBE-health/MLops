@@ -49,7 +49,7 @@ def set_agent(tools, llm, memory):
 
 def set_prompt(format_instructions):
     prompt = PromptTemplate(
-        template="List 10 exercise in noun format which is related with {subject} f.\n{format_instructions}",
+        template="List 10 sports in noun format which is related with {subject} f.\n{format_instructions}",
         #template="List five exercise similar with {subject} f.\n{format_instructions}",
         input_variables=["subject"],
         partial_variables={"format_instructions": format_instructions}
