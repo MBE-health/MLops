@@ -39,7 +39,7 @@ class Workout_Routine(BaseModel):
 def prompt_agent(pd_ex, search_ex, grade):
     ex_list = set_exercise(pd_ex,search_ex)
     health_condition = set_grade_explanation(grade)["grade_explanation"]
-    chat = ChatOpenAI(temperature=0, k=1)
+    chat = ChatOpenAI(temperature=0)
     template = """"
     You are a helpful assistant that make workout routine using {ex_list} which is called "exercise candidates". Workout routine is make up for 3 steps. 
     client's health condition is {health_condition}.
