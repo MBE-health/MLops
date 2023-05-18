@@ -51,6 +51,7 @@ def prompt_agent(pd_ex, search_ex, grade):
     output to return should be only one json. do not add any description about output.
     For json format, key for step 1 is "step_1" and key for step 2 is "step_2", key for step 3 is "step_3".
     For json format, key "step_1", "step_2". "step_3" compose of "exercise_list" property and "time" property.
+    Just give answer in json format.
     ```
     """
     system_message_prompt = SystemMessagePromptTemplate.from_template(template)
