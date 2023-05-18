@@ -81,7 +81,7 @@ def parse_grade_input(input_parameters : clf_input):
     age = input_dictionary['측정연령수']
     height = input_dictionary['신장']
     weight = input_dictionary['체중' ]
-    fat = input_dictionary['체지방율']
+    fat = input_dictionary['체지방률']
     stretch = input_dictionary['앉아윗몸앞으로굽히기']
     bmi = input_dictionary['BMI']
     crossUp = input_dictionary['교차윗몸일으키기' ]
