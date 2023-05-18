@@ -122,9 +122,10 @@ def csv_rec(keywords:str):
     return {"factor":keywords, "exercise":csv_rec}
 
 @app.post("/total_rec")
-def get_total_rec(health_params : clf_input,csv_keywords:str,search_keyword:str ):
-    grade = get_clf(parse_grade_input(health_params))
+def get_total_rec(grade:int, health_params : clf_input, csv_keywords:str,search_keyword:str ):
+    #grade = get_clf(parse_grade_input(health_params))
     csv_ex = csv_pandas_agent(csv_keywords)
+    print(search_keyword)
     if (search_keyword!=""):
         search_ex = search_tools_agent(search_keyword)
     else:
