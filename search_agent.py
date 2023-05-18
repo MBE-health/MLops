@@ -40,7 +40,7 @@ def set_agent(tools, llm, memory):
         agent="zero-shot-react-description", 
         tools=tools, 
         llm=llm,
-        verbose=False,
+        verbose=True,
         max_iterations=3,
         memory=memory
     )
