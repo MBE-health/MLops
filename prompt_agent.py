@@ -29,7 +29,7 @@ def set_grade_explanation(grade_num):
     data = {"grade_num": grade_num, "grade_name": grade[grade_num], "grade_explanation":explanation[grade_num]}
     return data
 class Step(BaseModel):
-    exercise_list: set[str] = Field(description="list of exercise in certain exercise routine step")
+    exercise_list: list[str] = Field(description="list of exercise in certain exercise routine step")
     time: int | str = Field(description="time to spend for exercise routine certain step")
 class Workout_Routine(BaseModel):
     step_1:Step
