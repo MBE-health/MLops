@@ -84,5 +84,5 @@ def get_5_ex(ex_list):
   if len(ex_list)!=5:
     while len(ex_list)!=5:
       idx = random.randint(0, len(ex_list))
-      ex_list.push(ex_list[idx])
+      ex_list.append(ex_list[idx])
   return ex_list
