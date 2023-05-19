@@ -115,7 +115,11 @@ def get_clf(input_list):
     grade_clf_model = joblib.load('./model/grade_clf/clf_LGBM.pkl')
     prediction = grade_clf_model.predict([input_list])
     return prediction[0].item()
-     
+
+@app.post("/grade")
+def non_rec(health_params : clf_input):
+    group_num = get_clf(parse_grade_input(health_params))  
+    return group_num
 
 @app.post('/non_rec')
 def non_rec(health_params : clf_input):
