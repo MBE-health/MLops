@@ -1,3 +1,4 @@
+import random
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from mlxtend.preprocessing import TransactionEncoder
@@ -76,3 +77,12 @@ def get_top5_ex(ar_df):
   ar_df_sorted = get_sorted(ar_df)
   ex_rec_list = create_top5_ex(ar_df_sorted)
   return ex_rec_list
+
+
+def get_5_ex(ex_list):
+  
+  if len(ex_list)!=5:
+    while len(ex_list)!=5:
+      idx = random.randint(0, len(ex_list))
+      ex_list.push(ex_list[idx])
+  return ex_list

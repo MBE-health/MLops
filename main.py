@@ -61,15 +61,28 @@ def non_ex(group_num, new_user_df):
 
 
     pre_ar_df = get_apriori_result(pre_ex_list,min_support = 0.05, min_confidence=0.8)
-    pre_top5 = get_top5_ex(pre_ar_df)
+    pre_top5 = get_5_ex(get_top5_ex(pre_ar_df))
 
     main_ar_df = get_apriori_result(main_ex_list,min_support = 0.05, min_confidence=0.8)
-    main_top5 = get_top5_ex(main_ar_df)
+    main_top5 = get_5_ex(get_top5_ex(main_ar_df))
     
     after_ar_df = get_apriori_result(after_ex_list,min_support = 0.05, min_confidence=0.8)
-    after_top5 = get_top5_ex(after_ar_df)
+    after_top5 = get_5_ex(get_top5_ex(after_ar_df))
 
-    ex = {"pre_ex":pre_top5, "main_ex":main_top5, "after_ex":after_top5}
+    ex = {
+        "step_1": {
+            "exercise_list": pre_top5,
+            "time": 10
+        },
+        "step_2": {
+            "exercise_list": main_top5,
+            "time": 30
+        },
+        "step_3": {
+            "exercise_list": after_top5,
+            "time": 10
+        }
+    }
     print(ex)
     return ex
 
