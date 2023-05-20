@@ -125,7 +125,7 @@ def non_rec(health_params : clf_input):
 def non_rec(health_params : clf_input):
     group_num = get_clf(parse_grade_input(health_params))  
     rec = non_ex(group_num, health_params)
-    return {"group_num":group_num, "ex":rec}
+    return rec
 
 
 @app.get("/search_rec") # 검색 툴 활용한
