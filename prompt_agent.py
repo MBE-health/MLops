@@ -12,10 +12,12 @@ from langchain.output_parsers import PydanticOutputParser
 
 def set_exercise(pd_ex, search_ex):
     temp = []
-    if pd_ex[0]!="'Agent stopped due to iteration limit or time limit.'":
-        temp +=pd_ex
-    if search_ex[0]!="'Agent stopped due to iteration limit or time limit.'":
-        temp+=search_ex 
+    if len(pd_ex)==5:
+        if pd_ex[0]!="'Agent stopped due to iteration limit or time limit.'":
+            temp +=pd_ex
+    if len(search_ex)==5:
+        if search_ex[0]!="'Agent stopped due to iteration limit or time limit.'":
+            temp+=search_ex 
     ex_list = (", ").join(temp)
     return ex_list
 
